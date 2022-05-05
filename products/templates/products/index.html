@@ -20,7 +20,7 @@
             <th scope="row">{{ item.title }}</th>
             <td>{{ item.price }}</td>
             <td>{{ item.description }}</td>
-            <td><a style="margin-right: 30px;" href="#">Update</a></td>
+            <td><a style="margin-right: 30px;" href="{% url 'update-product' item.id %}">Update</a></td>
             <td><a style="margin-right: 30px;" href="#">Delete</a></td>
         </tr>
         {% endfor %}

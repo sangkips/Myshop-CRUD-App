@@ -26,8 +26,20 @@ def create_product(request):
     return render(request, 'products/create.html', context)
 
 
-def update_product(request):
-    return render(request, 'products/update.html')
+def update_product(request, pk):
+    items = Product.objects.get(id=pk)
+    form = ProductForm(instance=items)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=items)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {
+        'form': form,
+        'items': items
+    }
+    return render(request, 'products/update.html', context)
 
 
 def delete_product(request):
