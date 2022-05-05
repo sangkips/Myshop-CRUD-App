@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from .forms import ProductForm
 from products.models import Product
 
 
@@ -12,7 +13,17 @@ def home_view(request):
 
 
 def create_product(request):
-    return render(request, 'products/create.html')
+    form = ProductForm
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {
+        'form': form
+    }
+    return render(request, 'products/create.html', context)
 
 
 def update_product(request):

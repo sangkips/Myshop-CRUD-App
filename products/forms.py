@@ -8,5 +8,11 @@ class ProductForm(ModelForm):
 
         model = Product
 
-        fields = ' __all__'
+        fields = ('title', 'price', 'description')
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
+            'price': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Price (Kshs)'}),
+            'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Product description'}),
+        }
 
