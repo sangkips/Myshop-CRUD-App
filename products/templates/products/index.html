@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Products</h3>
+<ul>
+    {% for item in items %}
+        <li>{{item.title}} (Kshs{{item.price}})</li>
+
+    {% endfor %}
+</ul>
+
+{% endblock content %}
