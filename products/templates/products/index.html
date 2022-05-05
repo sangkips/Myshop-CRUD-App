@@ -1,13 +1,35 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>Products</h3>
-<ul>
-    {% for item in items %}
-        <li>{{item.title}} (Kshs{{item.price}})</li>
+<h3 style="text-align: center; padding-top: 1em; padding-bottom: 1em;">Products List Information</h3>
 
-    {% endfor %}
-</ul>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td scope="col">Product Name</td>
+            <td scope="col">Price (Kshs)</td>
+            <td scope="col">Description</td>
+            <td scope="col">Action</td>
+            <td scope="col">Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+        <tr>
+            <th scope="row">{{ item.title }}</th>
+            <td>{{ item.price }}</td>
+            <td>{{ item.description }}</td>
+            <td><a style="margin-right: 30px;" href="#">Update</a></td>
+            <td><a style="margin-right: 30px;" href="#">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </table>
+</div>
 
+<div class="text-center">
+    <a href="#"><button type="button" class="btn btn-primary">Add New Products</button></a>
+</div>
 {% endblock content %}
