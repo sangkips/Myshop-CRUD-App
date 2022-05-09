@@ -8,6 +8,6 @@ from .views import home_view, \
 urlpatterns = [
     path('', home_view, name='home'),
     path('create/', create_product, name='create-product'),
-    path('update/<str:pk>/', update_product, name='update-product'),
-    path('delete/<str:pk>/', delete_product, name='delete-url'),
+    path('update//<str:pk>', update_product, name='update-product'),
+    path('delete//<str:pk>', delete_product, name='delete-product'),
 ]

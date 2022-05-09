@@ -15,16 +15,16 @@
         </tr>
         </thead>
         <tbody>
-        {% for item in items %}
+        {% for product in products %}
         <tr>
-            <th scope="row">{{ item.title }}</th>
-            <td>{{ item.price }}</td>
-            <td>{{ item.description }}</td>
-            <td><a style="margin-right: 30px;" href="{% url 'update-product' item.id %}">Update</a></td>
-            <td><a style="margin-right: 30px;" href="#">Delete</a></td>
+            <th scope="row">{{ product.title }}</th>
+            <td>{{ product.price }}</td>
+            <td>{{ product.description }}</td>
+            <td><a style="margin-right: 30px;" href="{% url 'update-product' product.id %}">Update</a></td>
+            <td><a style="margin-right: 30px;" href="{% url 'delete-product' product.id %}">Delete</a></td>
         </tr>
-        {% endfor %}
         </tbody>
+        {% endfor %}
     </table>
     </table>
 </div>

@@ -1,19 +1,19 @@
 from django.shortcuts import render, redirect
 
 from .forms import ProductForm
-from products.models import Product
+from .models import Product
 
 
 def home_view(request):
-    items = Product.objects.all()
+    products = Product.objects.all()
     context = {
-        'items': items
+        'products': products
     }
     return render(request, 'products/index.html', context)
 
 
 def create_product(request):
-    form = ProductForm
+    form = ProductForm()
 
     if request.method == 'POST':
         form = ProductForm(request.POST)
@@ -27,20 +27,30 @@ def create_product(request):
 
 
 def update_product(request, pk):
-    items = Product.objects.get(id=pk)
-    form = ProductForm(instance=items)
+    products = Product.objects.get(id=pk)
+    form = ProductForm(instance=products)
 
     if request.method == 'POST':
-        form = ProductForm(request.POST, instance=items)
+        form = ProductForm(request.POST, instance=products)
         if form.is_valid():
             form.save()
             return redirect('home')
     context = {
         'form': form,
-        'items': items
+        'products': products
     }
     return render(request, 'products/update.html', context)
 
 
-def delete_product(request):
-    return render(request, 'products/index.html')
+def delete_product(request, pk):
+    products = Product.objects.get(id=pk)
+    form = ProductForm()
+
+    if request.method == 'POST':
+        products.delete()
+        return redirect('home')
+    context = {
+        'product': products,
+        'form': form
+    }
+    return render(request, 'products/delete.html', context)
