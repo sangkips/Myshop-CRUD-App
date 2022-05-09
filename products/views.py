@@ -44,13 +44,11 @@ def update_product(request, pk):
 
 def delete_product(request, pk):
     products = Product.objects.get(id=pk)
-    form = ProductForm()
 
     if request.method == 'POST':
         products.delete()
         return redirect('home')
     context = {
         'product': products,
-        'form': form
     }
     return render(request, 'products/delete.html', context)
