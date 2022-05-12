@@ -1,6 +1,7 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-
-from .forms import ProductForm
+from django.contrib.auth.forms import UserCreationForm
+from .forms import ProductForm, CreateUserForm
 from .models import Product
 
 
@@ -10,6 +11,39 @@ def home_view(request):
         'products': products
     }
     return render(request, 'products/index.html', context)
+
+
+def register_view(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    context = {
+        'form': form
+    }
+    return render(request, 'products/register.html', context)
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'products/login.html', {'error_message': 'Incorrect username and / or password.'})
+    else:
+        return render(request, 'products/login.html')
+
+
+def user_page(request):
+    context = {}
+    return render(request, 'products/user.html', context)
 
 
 def create_product(request):

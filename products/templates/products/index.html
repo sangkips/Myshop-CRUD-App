@@ -8,6 +8,7 @@
         <thead>
         <tr>
             <td scope="col">Product Name</td>
+             <td scope="col">Featured Image</td>
             <td scope="col">Price (Kshs)</td>
             <td scope="col">Description</td>
             <td scope="col">Action</td>
@@ -18,6 +19,7 @@
         {% for product in products %}
         <tr>
             <th scope="row">{{ product.title }}</th>
+            <td>{{ product.featured_image }}</td>
             <td>{{ product.price }}</td>
             <td>{{ product.description }}</td>
             <td><a style="margin-right: 30px;" href="{% url 'update-product' product.id %}">Update</a></td>
@@ -32,4 +34,5 @@
 <div class="text-center">
     <a href="{% url 'create-product' %}"><button type="button" class="btn btn-primary">Add New Products</button></a>
 </div>
+
 {% endblock content %}
