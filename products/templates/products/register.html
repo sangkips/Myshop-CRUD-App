@@ -2,13 +2,60 @@
 
 {% block content %}
 <h2>Register</h2>
+<div class="container">
+    <form action="{% url 'register-user' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group clearfix">
+            <label for="" class="col-md-4 control-label text-right">Username:</label>
+            <div class="col-md-6">
+                <input name="username" value="" type="text" placeholder="Username" class="form-control" required/>
+            </div>
+        </div>
+         <br>
+        <div class="form-group clearfix">
+            <label for="" class="col-md-4 control-label text-right">Email:</label>
+            <div class="col-md-6">
+                <input name="email" value="" type="email" placeholder="Email" class="form-control" required/>
+            </div>
+        </div>
+         <br>
+        <div class="form-group clearfix">
+            <label for="" class="col-md-4 control-label text-right">First Name:</label>
+            <div class="col-md-6">
+                <input name="fname" value="" type="text" placeholder="First Name" class="form-control" required/>
+            </div>
+        </div>
+         <br>
+        <div class="form-group clearfix">
+            <label for="" class="col-md-4 control-label text-right">Last Name:</label>
+            <div class="col-md-6">
+                <input name="lname" value="" type="text" placeholder="Last Name" class="form-control" required/>
+            </div>
+        </div>
+         <br>
+        <div class="form-group clearfix">
+            <label for="" class="col-md-4 control-label text-right">Password:</label>
+            <div class="col-md-6">
+                <input name="password1" id="password1" type="password" placeholder="Password" class="form-control"
+                       required/>
+            </div>
+        </div>
+         <br>
 
-<form action="" method="POST">
-    {% csrf_token %}
-    
-    {{ form.as_p }}
+        <div class="form-group clearfix">
+            <label for="" class="col-md-4 control-label text-right">Confirm Password:</label>
+            <div class="col-md-6">
+                <input name="password2" id="password2" type="password" placeholder="Confirm Password" class="form-control"
+                       required/>
+            </div>
+        </div>
+        <br>
+        <div class="col-md-6 col-md-offset-4">
+            <input name="login" type="submit" value="Register" class="btn btn-success"/> &nbsp;
+            Do you have an Account: <a href=" {% url 'login' %}"> Login</a>
+        </div>
+    </form>
+</div>
 
-    <input type="submit" name="submit" value="Submit">
-</form>
 
 {% endblock content %}

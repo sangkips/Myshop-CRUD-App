@@ -1,7 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from .forms import ProductForm, CreateUserForm
+from .forms import ProductForm
 from .models import Product
 
 
@@ -14,17 +15,23 @@ def home_view(request):
 
 
 def register_view(request):
-    form = CreateUserForm()
-
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    context = {
-        'form': form
-    }
-    return render(request, 'products/register.html', context)
+        username = request.POST['username']
+        email = request.POST['email']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        myuser = User.objects.create_user(username, email, password1)
+        myuser.first_name = fname
+        myuser.last_name = lname
+
+        myuser.save()
+
+        messages.success(request, f"Your account has been created successfully")
+        return redirect('login')
+    return render(request, 'products/register.html')
 
 
 def login_view(request):
@@ -36,14 +43,9 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            return render(request, 'products/login.html', {'error_message': 'Incorrect username and / or password.'})
+            return render(request, 'products/login.html', {'error_message': 'Incorrect username or password.'})
     else:
         return render(request, 'products/login.html')
-
-
-def user_page(request):
-    context = {}
-    return render(request, 'products/user.html', context)
 
 
 def create_product(request):
