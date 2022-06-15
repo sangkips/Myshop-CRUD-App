@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a5tv^zv)^u2b7e+_o8zc=w#o@psvnp3jy9wsb7f%29p6!756*1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['myshop-crud-app.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
