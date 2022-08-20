@@ -1,6 +1,6 @@
 # Myshop-CRUD-App
 
-Myshop-CRUD-App is an application that helps perform CRUD applications on your syatem.
+Myshop-CRUD-App is an application that helps perform CRUD applications on your system.
 
 ## Installation
 
